@@ -2,8 +2,10 @@ package notifications
 
 import (
 	"fmt"
-	"Notification/events"
+
 	"time"
+
+	"main.go/events"
 )
 
 func UserRegisterd(bus *events.EventBus, UserID int, Name string, email string) {

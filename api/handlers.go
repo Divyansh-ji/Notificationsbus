@@ -4,7 +4,10 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"main.go/db"
+	"main.go/events"
 	"main.go/models"
+	"main.go/notifications"
 )
 
 func RegisterUser(c *gin.Context) {
@@ -15,5 +18,16 @@ func RegisterUser(c *gin.Context) {
 		})
 		return
 	}
-	
+	if err := db.DB.Create(&User).Error; err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"message": "internal server error",
+		})
+		return
+	}
+	notifications.UserRegisterd(&events.EventBus{}, User.ID, User.Name, User.Email)
+
+	c.JSON(http.StatusOK, gin.H{
+		"message": "user registered successfully",
+	})
+
 }

@@ -1,6 +1,6 @@
 package notifications
 
-import "main/Notification/events"
+import "main.go/events"
 
 func HandleUserRegistered(e events.Event) {
 	data := e.Payload.(events.UserRegisteredEvent)

@@ -1,8 +1,8 @@
 package main
 
 import (
-	"main/Notification/events"
-	"main/Notification/notifications"
+	"main.go/events"
+	"main.go/notifications"
 )
 
 func main() {
