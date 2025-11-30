@@ -17,12 +17,6 @@ func main() {
 
 	db.SyncDatabase()
 
-	bus := events.NewEventBus()
-
-	bus.Subscribe("User.Registerd", notifications.HandleUserRegistered)
-
-	notifications.UserRegisterd(bus, 101, "Divyansh", "divyanshTiwary01@gmail.com")
-
 	r := gin.Default()
 
 	r.POST("/User", api.RegisterUser)
@@ -31,5 +25,11 @@ func main() {
 	if err := r.Run(":8080"); err != nil {
 		log.Fatal("Failed to start server:", err)
 	}
+
+	bus := events.NewEventBus()
+
+	bus.Subscribe("User.Registerd", notifications.HandleUserRegistered)
+
+	notifications.UserRegisterd(bus, 101, "Divyansh", "divyanshTiwary01@gmail.com")
 
 }

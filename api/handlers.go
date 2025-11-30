@@ -12,7 +12,7 @@ import (
 
 func RegisterUser(c *gin.Context) {
 	var User models.User
-	if err := c.ShouldBindJSON(&User).Error; err != nil {
+	if err := c.ShouldBindJSON(&User); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"message": "internal server error",
 		})
