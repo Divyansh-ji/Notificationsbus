@@ -8,6 +8,7 @@ import (
 	"main.go/events"
 	"main.go/models"
 	"main.go/notifications"
+	"main.go/queue"
 )
 
 func RegisterUser(c *gin.Context) {
@@ -24,7 +25,16 @@ func RegisterUser(c *gin.Context) {
 		})
 		return
 	}
+
 	notifications.UserRegisterd(&events.EventBus{}, User.ID, User.Name, User.Email)
+	// job is created here
+	queue.JobQueue <- queue.NotificationJob{
+		UserID:  User.ID,
+		Email:   User.Email,
+		Name:    User.Name,
+		Type:    "email",
+		Message: "Welcome to our platform 🎉",
+	}
 
 	c.JSON(http.StatusOK, gin.H{
 		"message": "user registered successfully",
