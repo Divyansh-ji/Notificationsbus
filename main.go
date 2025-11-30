@@ -8,6 +8,7 @@ import (
 	"main.go/db"
 	"main.go/events"
 	"main.go/notifications"
+	"main.go/worker"
 )
 
 func main() {
@@ -27,6 +28,8 @@ func main() {
 	}
 
 	bus := events.NewEventBus()
+
+	worker.StartWorkers(5)
 
 	bus.Subscribe("User.Registerd", notifications.HandleUserRegistered)
 
