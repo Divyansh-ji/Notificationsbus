@@ -4,12 +4,9 @@ import (
 	"time"
 )
 
-type SendEmailEvent struct {
-	UserID    int       // optional, if you want to store notification later
-	Email     string    // receiver's email
-	Subject   string    // email subject
-	Message   string    // body/content
-	CreatedAt time.Time // timestamp when event was created
+type UpdatedEmailEvent struct {
+	UserID   int    // optional, if you want to store notification later
+	NewEmail string // receiver's email
 }
 type SendSMSEvent struct {
 	UserID    int

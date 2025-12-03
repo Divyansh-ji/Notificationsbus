@@ -11,6 +11,10 @@ type Event struct {
 	TimeStamp time.Time
 }
 
+func (e *Event) Publish(name string, event Event) {
+	panic("unimplemented")
+}
+
 type Handlerfunc func(Event)
 
 type EventBus struct {
@@ -23,6 +27,8 @@ func NewEventBus() *EventBus {
 		Subscribers: make(map[string][]Handlerfunc),
 	}
 }
+
+var DefaultBus = NewEventBus()
 
 func (b *EventBus) Subscribe(topic string, handler Handlerfunc) {
 	b.mu.Lock()

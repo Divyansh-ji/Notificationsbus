@@ -1,6 +1,8 @@
 package worker
 
 import (
+	"sync"
+
 	"main.go/notifications"
 	"main.go/queue"
 )
@@ -10,15 +12,25 @@ func StartWorkers(n int) {
 		go worker(i)
 	}
 }
-
 func worker(id int) {
 	for job := range queue.JobQueue {
 
-		if job.Type == "email" {
-			notifications.EmailService(job.UserID, job.Email, "Subject", "Body")
-		}
+		if job.Type == "email & Sms" {
+			var wg sync.WaitGroup
+			wg.Add(2)
 
-		// later you can add SMS / webhook also
-		// if job.Type == "sms" { services.SendSMS(...) }
+			go func() {
+				notifications.EmailService(job.UserID, job.Email, "Meesssage", "email is emailing ")
+				wg.Done()
+			}()
+
+			go func() {
+				notifications.SmsServives(job.UserID, "-0987654321", "hey whatsapp")
+				wg.Done()
+			}()
+
+			wg.Wait()
+
+		}
 	}
 }

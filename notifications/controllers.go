@@ -24,3 +24,17 @@ func UserRegisterd(bus *events.EventBus, UserID int, Name string, email string) 
 	}
 	bus.Publish(event.Name, event)
 }
+func UserEmailUpdated(bus *events.Event, UserId int, NewEmail string) {
+	updates := events.UpdatedEmailEvent{
+		UserID:   UserId,
+		NewEmail: NewEmail,
+	}
+	fmt.Println("Info of the User registerd is", updates)
+	event := events.Event{
+		Name:      "UserEmailUpdated",
+		Payload:   updates,
+		TimeStamp: time.Now(),
+	}
+	bus.Publish(event.Name, event)
+
+}

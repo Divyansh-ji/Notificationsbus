@@ -25,7 +25,8 @@ func RegisterUser(c *gin.Context) {
 		return
 	}
 
-	notifications.UserRegisterd(&events.EventBus{}, User.ID, User.Name, User.Email)
+	notifications.UserRegisterd(events.DefaultBus, User.ID, User.Name, User.Email)
+	
 	// job is created here
 
 	c.JSON(http.StatusOK, gin.H{
