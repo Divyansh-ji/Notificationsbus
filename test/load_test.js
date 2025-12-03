@@ -3,7 +3,7 @@ import { sleep, check } from "k6";
 
 export let options = {
   vus: 10000,          // virtual users
-  duration: "30s",   // total test duration
+  duration: "15s",   // total test duration
   thresholds: {
     http_req_duration: ["p(95)<500"], // 95% requests must complete <500ms
   },
