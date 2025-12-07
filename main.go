@@ -20,9 +20,9 @@ func main() {
 	db.SyncDatabase()
 
 	r := gin.Default()
-	// Initialize queue and workers BEFORE starting the server
+	//Initialize queue and workers BEFORE starting the server
 	queue.InitQueue(100)
-	worker.StartWorkers(10)
+	worker.StartWorkers(25)
 
 	// Use the shared bus and subscribe BEFORE server starts
 	bus := events.DefaultBus

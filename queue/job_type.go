@@ -9,3 +9,9 @@ type NotificationJob struct {
 	Message string
 }
 
+type Job struct {
+	Type   string
+	UserID int
+	Name   string
+	Email  string
+}
