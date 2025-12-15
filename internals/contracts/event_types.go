@@ -4,8 +4,16 @@ import (
 	"time"
 )
 
+type EventName string
+
+const (
+	UserRegisted EventName = "user.registered"
+	UpdatedEmail EventName = "user.email.updated"
+	SendSMS      EventName = "notifcation.sms.send"
+)
+
 type UpdatedEmailEvent struct {
-	UserID   int    // optional, if you want to store notification later
+	UserID   int
 	NewEmail string // receiver's email
 }
 type SendSMSEvent struct {

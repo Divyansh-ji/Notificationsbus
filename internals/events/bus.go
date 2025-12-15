@@ -3,10 +3,12 @@ package events
 import (
 	"sync"
 	"time"
+
+	"notification/internal/contracts"
 )
 
 type Event struct {
-	Name      string
+	Name      contracts.EventName
 	Payload   any
 	TimeStamp time.Time
 }
